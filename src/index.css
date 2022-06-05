@@ -1,3 +1,14 @@
+.ant-col{
+    max-width: 712px;
+}
 body {
-background-color: #282c34;
+    padding: 5%;
+    background-color: #282c34;
+}
+
+
+
+.ant-menu-item{
+    color: #d3d3d3 ;
+    font-size: medium;
 }

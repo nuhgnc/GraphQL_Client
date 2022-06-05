@@ -5,6 +5,10 @@
 .content{
     background-color: aliceblue;
     padding: 24px;
-    margin: 24px;
     border: solid 4px bisque;
+}
+
+.HeaderMenu{
+    background: none;
+    border: none;
 }
