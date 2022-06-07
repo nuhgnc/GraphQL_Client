@@ -5,6 +5,9 @@ import styles from "./styles.module.css";
 
 import Home from "pages/Home";
 import NewPost from "pages/NewPost";
+import Post from "pages/Post";
+
+
 import HeaderMenu from "./HeaderMenu";
 
 function App() {
@@ -16,6 +19,7 @@ function App() {
         <div className={styles.content}>
         <Switch>
           <Route path="/new"><NewPost /></Route>
+          <Route path="/post/:id"><Post /></Route>
           <Route path="/"><Home /></Route>
           </Switch>
         </div>
