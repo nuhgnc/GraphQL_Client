@@ -5,6 +5,7 @@ query Post($id: ID!) {
   post(id: $id) {
     id
     title
+    short_description
     description
     cover
     user {

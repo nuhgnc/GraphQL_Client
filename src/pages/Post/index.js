@@ -4,6 +4,7 @@ import { Typography, Image } from "antd";
 
 import { GET_1POST } from "./Queries";
 import Loading from "components/Loading/Loading";
+import styles from "./styles.module.css";
 
 function Post() {
   const { Title } = Typography;
@@ -21,7 +22,7 @@ function Post() {
     <div>
       <Title level={3}>{post.title} </Title>
         <Image  src={post.cover}/> <br /> <br />
-      <div>
+      <div className={styles.description}>
         { post.description }
       </div>
     </div>
