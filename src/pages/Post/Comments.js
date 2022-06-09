@@ -1,15 +1,20 @@
-import { useLazyQuery } from "@apollo/client";
+import { useQuery, useLazyQuery  } from "@apollo/client";
 import { Divider, Button, Comment, List } from "antd";
-import { CommentOutlined } from "@ant-design/icons";
+import {  AccountBookFilled } from "@ant-design/icons";
 
-import { GET_POST_COMMENTS } from "./Queries";
+import { GET_EVENT_PARTICIPANTS } from "./Queries";
 import styles from "./styles.module.css";
 
 function Comments({ id }) {
-  const [getPostComments, { loading, data }] = useLazyQuery(GET_POST_COMMENTS, {
+  const [getParticipants,{ loading, error, data }] = useLazyQuery(GET_EVENT_PARTICIPANTS, {
     variables: { id },
   });
 
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
+  
   return (
     <>
       <Divider>
@@ -17,9 +22,10 @@ function Comments({ id }) {
           <Button
             type="primary"
             shape="round"
-            icon={<CommentOutlined />}
+            icon={<AccountBookFilled />}
             loading={loading}
-            onClick={() => getPostComments()}
+            onClick={()=>getParticipants()}
+            
           >
             Comments
           </Button>
@@ -30,19 +36,23 @@ function Comments({ id }) {
         <List
           className="comment-list"
           itemLayout="horizontal"
-          dataSource={data.post.comments}
+          dataSource={data.event}
           renderItem={(item) => (
             <li>
+              
               <Comment
-                author={item.user.full_name}
-                avatar={item.user.profile_photo}
-                content={item.text}
+                author={item.participant[0].username[0].username}
+                content={item.participant[0].username[0].email}
+
               />
             </li>
           )}
         />
+        
       )}
+      
     </>
+    
   );
 }
 
