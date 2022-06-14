@@ -8,14 +8,18 @@ import NewPost from "pages/NewPost";
 import Post from "pages/Post";
 
 
-import HeaderMenu from "./HeaderMenu";
+import HeaderMenu from "components/HeaderMenu/index";
+import PostCounter from "components/PostCounter";
 
 function App() {
   return (
     <div className={styles.container}>
       <Row justify="center">
         <Col span={14} className={styles.col}>
-        <HeaderMenu />
+        <Row>
+          <Col span={18}> <HeaderMenu /></Col>
+          <Col span={6}> <PostCounter /> </Col>
+        </Row>
         <div className={styles.content}>
         <Switch>
           <Route path="/new"><NewPost /></Route>
