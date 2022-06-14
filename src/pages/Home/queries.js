@@ -14,3 +14,15 @@ export const GET_POST = gql`
   }
 `;
 
+export const POST_SUBS = gql`
+subscription PostCreated {
+  postCreated{
+    id
+    title
+    description
+    user{
+      profile_photo
+    }
+  }
+}
+`;

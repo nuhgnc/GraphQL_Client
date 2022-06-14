@@ -1,5 +1,5 @@
 // 3.Parti Kütüphaneler
-import React from "react";
+import {useEffect} from "react";
 import { useQuery } from '@apollo/client';
 import { Link } from "react-router-dom";
 import { List, Avatar } from "antd";
@@ -9,12 +9,29 @@ import  styles  from "./styles.module.css";
 
 // Dahili Dosyalar
 import Loading  from 'components/Loading/Loading';
-import { GET_POST } from "./queries";
+import { GET_POST, POST_SUBS } from "./queries";
 
 
 
 function Home() {
-  const { loading, error, data } = useQuery(GET_POST);
+  const { loading, error, data, subscribeToMore } = useQuery(GET_POST);
+
+  
+  useEffect(()=> {
+    subscribeToMore({
+      document: POST_SUBS,
+      updateQuery: ( prev, { subscriptionData }) => {
+       if(!subscriptionData) return prev;
+       return {
+         posts: [subscriptionData.data.postCreated,...prev.posts]
+
+       }
+        
+      },
+      onError: err => console.log(err),
+    })
+  }, [null])
+
   if (loading) return <Loading />;
   if (error) return `Error! ${error.message}`;
   
